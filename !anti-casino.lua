@@ -1,4 +1,4 @@
---Больше скриптов от автора можно найти в группе ВК: http://vk.com/qrlk.mods
+--Р‘РѕР»СЊС€Рµ СЃРєСЂРёРїС‚РѕРІ РѕС‚ Р°РІС‚РѕСЂР° РјРѕР¶РЅРѕ РЅР°Р№С‚Рё РІ РіСЂСѓРїРїРµ Р’Рљ: http://vk.com/qrlk.mods
 script_name("anti-casino")
 script_authors("qrlk", "homie nope", "#Maddison")
 script_version("24.01.2019-1")
@@ -13,10 +13,10 @@ sound = false
 function main()
   if not isSampLoaded() or not isSampfuncsLoaded() then return end
   while not isSampAvailable() do wait(100) end
-  -- вырежи тут, если хочешь отключить проверку обновлений
+  -- РІС‹СЂРµР¶Рё С‚СѓС‚, РµСЃР»Рё С…РѕС‡РµС€СЊ РѕС‚РєР»СЋС‡РёС‚СЊ РїСЂРѕРІРµСЂРєСѓ РѕР±РЅРѕРІР»РµРЅРёР№
   update("http://qrlk.me/dev/moonloader/anti-casino/stats.php", '['..string.upper(thisScript().name)..']: ', "http://vk.com/qrlk.mods", "anticasinochangelog")
 	openchangelog("anticasinochangelog", "http://qrlk.me/changelog/anti-casino")
-	-- вырежи тут, если хочешь отключить проверку обновлений
+	-- РІС‹СЂРµР¶Рё С‚СѓС‚, РµСЃР»Рё С…РѕС‡РµС€СЊ РѕС‚РєР»СЋС‡РёС‚СЊ РїСЂРѕРІРµСЂРєСѓ РѕР±РЅРѕРІР»РµРЅРёР№
   if not doesDirectoryExist(getGameDirectory().."\\moonloader\\resource") then
     createDirectory(getGameDirectory().."\\moonloader\\resource")
   end
@@ -39,7 +39,7 @@ end
 function sampev.onSendPickedUpPickup(pid)
   pX, pY, pZ = getCharCoordinates(playerPed)
   if getDistanceBetweenCoords3d(pX, pY, pZ, 2195.0, 1677.5, 12.5) < 25 or getDistanceBetweenCoords3d(pX, pY, pZ, 2020.8, 1010.8, 10.8) < 10 then
-    sampAddChatMessage("Вход в казино для тебя сегодня закрыт. У тебя денег много? Шагай отсюда!", 0xFF0000)
+    sampAddChatMessage("Р’С…РѕРґ РІ РєР°Р·РёРЅРѕ РґР»СЏ С‚РµР±СЏ СЃРµРіРѕРґРЅСЏ Р·Р°РєСЂС‹С‚. РЈ С‚РµР±СЏ РґРµРЅРµРі РјРЅРѕРіРѕ? РЁР°РіР°Р№ РѕС‚СЃСЋРґР°!", 0xFF0000)
     sound = true
     return false
   end
@@ -94,23 +94,23 @@ function update(php, prefix, url, komanda)
               lua_thread.create(function(prefix, komanda)
                 local dlstatus = require('moonloader').download_status
                 local color = -1
-                sampAddChatMessage((prefix..'Обнаружено обновление. Пытаюсь обновиться c '..thisScript().version..' на '..updateversion), color)
+                sampAddChatMessage((prefix..'РћР±РЅР°СЂСѓР¶РµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ. РџС‹С‚Р°СЋСЃСЊ РѕР±РЅРѕРІРёС‚СЊСЃСЏ c '..thisScript().version..' РЅР° '..updateversion), color)
                 wait(250)
                 downloadUrlToFile(updatelink, thisScript().path,
                   function(id3, status1, p13, p23)
                     if status1 == dlstatus.STATUS_DOWNLOADINGDATA then
-                      print(string.format('Загружено %d из %d.', p13, p23))
+                      print(string.format('Р—Р°РіСЂСѓР¶РµРЅРѕ %d РёР· %d.', p13, p23))
                     elseif status1 == dlstatus.STATUS_ENDDOWNLOADDATA then
-                      print('Загрузка обновления завершена.')
+                      print('Р—Р°РіСЂСѓР·РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ Р·Р°РІРµСЂС€РµРЅР°.')
                       if komandaA ~= nil then
-                        sampAddChatMessage((prefix..'Обновление завершено! Подробнее об обновлении - /'..komandaA..'.'), color)
+                        sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ Р·Р°РІРµСЂС€РµРЅРѕ! РџРѕРґСЂРѕР±РЅРµРµ РѕР± РѕР±РЅРѕРІР»РµРЅРёРё - /'..komandaA..'.'), color)
                       end
                       goupdatestatus = true
                       lua_thread.create(function() wait(500) thisScript():reload() end)
                     end
                     if status1 == dlstatus.STATUSEX_ENDDOWNLOAD then
                       if goupdatestatus == nil then
-                        sampAddChatMessage((prefix..'Обновление прошло неудачно. Запускаю устаревшую версию..'), color)
+                        sampAddChatMessage((prefix..'РћР±РЅРѕРІР»РµРЅРёРµ РїСЂРѕС€Р»Рѕ РЅРµСѓРґР°С‡РЅРѕ. Р—Р°РїСѓСЃРєР°СЋ СѓСЃС‚Р°СЂРµРІС€СѓСЋ РІРµСЂСЃРёСЋ..'), color)
                         update = false
                       end
                     end
@@ -120,11 +120,11 @@ function update(php, prefix, url, komanda)
               )
             else
               update = false
-              print('v'..thisScript().version..': Обновление не требуется.')
+              print('v'..thisScript().version..': РћР±РЅРѕРІР»РµРЅРёРµ РЅРµ С‚СЂРµР±СѓРµС‚СЃСЏ.')
             end
           end
         else
-          print('v'..thisScript().version..': Не могу проверить обновление. Смиритесь или проверьте самостоятельно на '..url)
+          print('v'..thisScript().version..': РќРµ РјРѕРіСѓ РїСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ. РЎРјРёСЂРёС‚РµСЃСЊ РёР»Рё РїСЂРѕРІРµСЂСЊС‚Рµ СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅРѕ РЅР° '..url)
           update = false
         end
       end
@@ -141,7 +141,7 @@ function openchangelog(komanda, url)
           if changelogurl == nil then
             changelogurl = url
           end
-          sampShowDialog(222228, "{ff0000}Информация об обновлении", "{ffffff}"..thisScript().name.." {ffe600}собирается открыть свой changelog для вас.\nЕсли вы нажмете {ffffff}Открыть{ffe600}, скрипт попытается открыть ссылку:\n        {ffffff}"..changelogurl.."\n{ffe600}Если ваша игра крашнется, вы можете открыть эту ссылку сами.", "Открыть", "Отменить")
+          sampShowDialog(222228, "{ff0000}РРЅС„РѕСЂРјР°С†РёСЏ РѕР± РѕР±РЅРѕРІР»РµРЅРёРё", "{ffffff}"..thisScript().name.." {ffe600}СЃРѕР±РёСЂР°РµС‚СЃСЏ РѕС‚РєСЂС‹С‚СЊ СЃРІРѕР№ changelog РґР»СЏ РІР°СЃ.\nР•СЃР»Рё РІС‹ РЅР°Р¶РјРµС‚Рµ {ffffff}РћС‚РєСЂС‹С‚СЊ{ffe600}, СЃРєСЂРёРїС‚ РїРѕРїС‹С‚Р°РµС‚СЃСЏ РѕС‚РєСЂС‹С‚СЊ СЃСЃС‹Р»РєСѓ:\n        {ffffff}"..changelogurl.."\n{ffe600}Р•СЃР»Рё РІР°С€Р° РёРіСЂР° РєСЂР°С€РЅРµС‚СЃСЏ, РІС‹ РјРѕР¶РµС‚Рµ РѕС‚РєСЂС‹С‚СЊ СЌС‚Сѓ СЃСЃС‹Р»РєСѓ СЃР°РјРё.", "РћС‚РєСЂС‹С‚СЊ", "РћС‚РјРµРЅРёС‚СЊ")
 					while sampIsDialogActive() do wait(100) end
 				  local result, button, list, input = sampHasDialogRespond(222228)
 				  if button == 1 then
